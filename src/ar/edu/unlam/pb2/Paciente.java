@@ -3,7 +3,7 @@ package ar.edu.unlam.pb2;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Paciente {
+public class Paciente{
 	
 	private Integer dni;
 	private String nombre;
@@ -14,17 +14,29 @@ public class Paciente {
 		this.dni = dni;
 		this.nombre = nombre;
 		this.vacunas = new LinkedList<Vacuna>();
+		this.enfermedades = new LinkedList<String>();
 	}
 	
+	public List<Vacuna> getVacunas() {
+		return vacunas;
+	}
+
+	public void setVacunas(List<Vacuna> vacunas) {
+		this.vacunas = vacunas;
+	}
+
 	public void registrarEnfermedad(String enfermedad) {
-		if(this.enfermedades.contains(enfermedad)) {
-			
-		}else {
 			enfermedades.add(enfermedad);
-		}
 	}
 	
-	public void darVacuna(Vacuna vacuna) {
+	public Boolean hasEnfermedad(String enfermedad) {
+		if(enfermedades.contains(enfermedad)) {
+			return true;
+		}
+		return false;
+	}
+	
+	public void agregarVacuna(Vacuna vacuna) {
 		this.vacunas.add(vacuna);
 
 	}
@@ -33,13 +45,13 @@ public class Paciente {
 		return this.vacunas.size();
 	}
 	
-	public Vacuna getVacuna(Vacuna vacuna) {
+	public Boolean buscarPrimeraDosis() {
 		for(Vacuna e:vacunas) {
-			if(e.getCodigoVacuna().equals(vacuna.getCodigoVacuna())) {
-				return e;
+			if(e.getDosis().equals("Primera dosis")) {
+				return Boolean.TRUE;
 			}
 		}
-		return null;
+		return Boolean.FALSE;
 	}
 
 	public Integer getDni() {
@@ -57,5 +69,7 @@ public class Paciente {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
+
 
 }
